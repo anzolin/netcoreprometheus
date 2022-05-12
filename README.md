@@ -1,2 +1,83 @@
-# netcoreprometheus
-Monitorando aplicações .Net Core com Prometheus
+[![Contributors][contributors-shield]][contributors-url]
+[![Watchers][watchers-shield]][watchers-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Forks][forks-shield]][forks-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+
+
+# Monitorando aplicações .Net Core com Prometheus
+
+>  Monitorar é a ação de: **"acompanhar alguma coisa para consideração, analisando as informações fornecidas por instrumentos técnicos; monitorizar: monitorar um processo, uma operação, um aparelho, etc"**.
+
+---
+
+<!-- TABLE OF CONTENTS -->
+### Índice
+<ol>
+  <li><a href="#introducao">Introdução</a></li>
+  <li><a href="#vantagens">Vantagens</a></li>
+  <li><a href="#o-que-e-o-prometheus">O que é o Prometheus?</a></li>
+  <li><a href="#examples">Examples</a></li>
+  <li><a href="#how-can-i-contribute">How can I contribute?</a></li>
+  <li><a href="#license">License</a></li>
+  <li><a href="#about-the-author">About the author</a></li>
+  <li><a href="#donate">Donate</a></li>
+</ol>
+
+---
+
+## Introdução
+
+O monitoramento de aplicações e servidores é uma parte importante do dia-a-dia do desenvolvedor de software. Isso inclui diversos tipos de análises, desde o monitoramento contínuo de possíveis exceções até o uso de CPU, memória e armazenamento do servidor. 
+
+Outro item importante do monitoramento é a capacidade de configurar alarmes, por exemplo, você pode querer receber um alerta através de algum canal conhecido como e-mail, chat, sms, sempre que ocorrer alguma indisponibilidade ou falha de processo na sua API.
+
+Um ponto relevante sobre métricas é entendermos o que é APM (Application Performance Management). APMs são serviços que visam garantir que os softwares atendam seus requisitos de desempenho e performance. Ele monitora pontos sobre velocidade de transações de softwares, infraestrutura de rede, sistemas entre outros. São software que auxiliam no troubleshooting de aplicaçõe para resolução de problemas.
+
+## Vantagens
+
+Podemos destacar várias vantagens de usar essas ferramentas para aumentar o controle de dados. Como estamos olhando muito para a Open Finance este ano, podemos falar um pouco sobre como estas ferramentas podem ajudar a trazer controle e governança sobre os processos bancários.
+
+Quando você integra seu software com as APIs do banco, você abre uma gama de possibilidades, mas e quanto ao controle de tudo isso? Como monitorar se os serviços que suportam essas interações estão funcionando corretamente? A resposta a estas perguntas é o monitoramento, que pode ser feito usando o Prometheus, AlertManager, Grafana e outros sistemas.
+
+Ao ter um monitoramento eficaz, você pode:
+
+1. Ter mais agilidade na solução de problemas;
+2. Identificar instabilidades e picos de transação de alto volume;
+3. Maior controle de dados.
+
+E estes são alguns dos muitos benefícios que o rastreamento de dados pode trazer ao seu negócio.
+
+## O que é o Prometheus?
+
+De acordo com o [github da ferramenta](https://github.com/prometheus/prometheus), o **Prometheus** é um sistema de monitoramento para serviços e aplicações. Ele coleta as métricas de seus alvos em determinados intervalos, avalia expressões de regras, exibe os resultados e também pode acionar alertas se alguma condição for observada como verdadeira.
+
+Dentre muitas, estas são principais características do Prometheus:
+
+* É um modelo de dados multi-dimensional (time series).
+* Possui uma linguagem própria (PromQL) para queries de dados em formato time series.
+* Totalmente autônomo, sem dependência de armazenamento externo.
+* A coleta das métricas ocorre com um modelo pull e via HTTP.
+* Também é possível enviar métricas através de um gateway intermediário.
+* A definição dos serviços a serem monitorados pode ser feita através de uma configuração estática ou através de descoberta.
+* Possui vários modos de suporte a gráficos e painéis.
+
+O objetivo deste post é focar no entendimento sobre como configurar a coleta de métricas — utilizando o modelo pull via HTTP — na sua aplicação e também a visualização delas. Sendo assim, aqui não serão abordados assuntos como configuração e implantação do Prometheus. Contudo, para ter uma ideia do funcionamento geral da ferramenta, é interessante entender como funcionam os componentes internos do Prometheus.
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/anzolin/netcoreprometheus.svg?style=for-the-badge
+[contributors-url]: https://github.com/anzolin/netcoreprometheus/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/anzolin/netcoreprometheus.svg?style=for-the-badge
+[forks-url]: https://github.com/anzolin/netcoreprometheus/network/members
+[watchers-shield]: https://img.shields.io/github/watchers/anzolin/netcoreprometheus.svg?style=for-the-badge
+[watchers-url]: https://github.com/anzolin/netcoreprometheus/watchers
+[stars-shield]: https://img.shields.io/github/stars/anzolin/netcoreprometheus.svg?style=for-the-badge
+[stars-url]: https://github.com/anzolin/netcoreprometheus/stargazers
+[issues-shield]: https://img.shields.io/github/issues/anzolin/netcoreprometheus.svg?style=for-the-badge
+[issues-url]: https://github.com/anzolin/netcoreprometheus/issues
+[license-shield]: https://img.shields.io/github/license/anzolin/netcoreprometheus.svg?style=for-the-badge
+[license-url]: https://github.com/anzolin/netcoreprometheus/blob/master/LICENSE.txt
