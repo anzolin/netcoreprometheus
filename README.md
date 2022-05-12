@@ -18,11 +18,13 @@
   <li><a href="#introducao">Introdução</a></li>
   <li><a href="#vantagens">Vantagens</a></li>
   <li><a href="#o-que-e-o-prometheus">O que é o Prometheus?</a></li>
+  
   <li><a href="#examples">Examples</a></li>
-  <li><a href="#how-can-i-contribute">How can I contribute?</a></li>
-  <li><a href="#license">License</a></li>
-  <li><a href="#about-the-author">About the author</a></li>
-  <li><a href="#donate">Donate</a></li>
+
+  <li><a href="#como-posso-contribuir">Como posso contribuir?</a></li>
+  <li><a href="#licenca">Licença</a></li>
+  <li><a href="#sobre-o-autor">Sobre o autor</a></li>
+  <li><a href="#doacoes">Doações</a></li>
 </ol>
 
 ---
@@ -64,6 +66,29 @@ Dentre muitas, estas são principais características do Prometheus:
 * Possui vários modos de suporte a gráficos e painéis.
 
 O objetivo deste post é focar no entendimento sobre como configurar a coleta de métricas — utilizando o modelo pull via HTTP — na sua aplicação e também a visualização delas. Sendo assim, aqui não serão abordados assuntos como configuração e implantação do Prometheus. Contudo, para ter uma ideia do funcionamento geral da ferramenta, é interessante entender como funcionam os componentes internos do Prometheus.
+
+## Como posso contribuir?
+
+Se você quer ajudar o projeto, aprimorando-o ou criando algo novo, seja bem-vindo. Este projeto foi criado para ser um lar de códigos úteis e reutilizáveis ​​para a comunidade .NET. Portanto, se você tiver algum trecho de código útil, limpo, desacoplado e testado e quiser contribuir para esse objetivo, faça uma [pull request](https://github.com/anzolin/netcoreprometheus/pulls)!
+
+
+## Licença
+
+Este projeto sob a [Licença MIT](https://github.com/anzolin/netcoreprometheus/blob/master/LICENSE).
+
+  
+## Sobre o autor
+
+Olá a todos, eu me chamo Diego Anzolin Ferreira. Eu sou um desenvolvedor .Net. Espero que você goste deste projeto tanto quanto eu gosto de desenvolvê-lo. Se você tiver algum problema, você pode postar um [GitHub issue](https://github.com/anzolin/netcoreprometheus/issues). You can reach me out at diego@anzolin.com.br.
+
+
+## Doações
+  
+Quer me ajudar a continuar criando projetos open source, faça uma doação:
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg?style=for-the-badge)](https://www.paypal.com/donate?business=DN2VPNW42RTXY&no_recurring=0&currency_code=BRL) [![Donate](https://img.shields.io/badge/-buy_me_a%C2%A0coffee-gray?logo=buy-me-a-coffee&style=for-the-badge)](https://www.buymeacoffee.com/anzolin)
+
+Obrigado!
 
 
 
