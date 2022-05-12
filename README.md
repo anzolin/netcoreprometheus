@@ -79,7 +79,7 @@ Este projeto sob a [Licença MIT](https://github.com/anzolin/netcoreprometheus/b
   
 ## Sobre o autor
 
-Olá a todos, eu me chamo Diego Anzolin Ferreira. Eu sou um desenvolvedor .Net. Espero que você goste deste projeto tanto quanto eu gosto de desenvolvê-lo. Se você tiver algum problema, você pode postar um [GitHub issue](https://github.com/anzolin/netcoreprometheus/issues). You can reach me out at diego@anzolin.com.br.
+Olá a todos, eu me chamo Diego Anzolin Ferreira. Eu sou um desenvolvedor .Net. Espero que você goste deste projeto tanto quanto eu gosto de desenvolvê-lo. Se você tiver algum problema, você pode postar um [GitHub issue](https://github.com/anzolin/netcoreprometheus/issues). Você pode me contatar em diego@anzolin.com.br.
 
 
 ## Doações
