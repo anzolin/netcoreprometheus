@@ -19,7 +19,7 @@ namespace NetCorePrometheus.Api.Controllers
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Cliente> Customers()
+        public IEnumerable<Cliente> Clientes()
         {
             return _clienteRepository.GetClientes();
         }
@@ -27,7 +27,7 @@ namespace NetCorePrometheus.Api.Controllers
 
         [HttpGet]
         [Route("cliente")]
-        public Cliente CustomerById([FromQuery] int id)
+        public Cliente ClienteById([FromQuery] int id)
         {
             return _clienteRepository.ClienteById(id);
         }
