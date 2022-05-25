@@ -166,7 +166,20 @@ app.UseHttpsRedirection();
 
 O parte da configuração customizada irá nos ajudar a gerar informações de todas as requisições que nossas controllers irão receber.
 
-<img src="images/img_009.png" alt="alt text" title="Title" />
+```csharp
+            // Custom Metrics to count requests for each endpoint and the method
+            var counter = Metrics.CreateCounter("webapimetric", "Counts requests to the WebApiMetrics API endpoints",
+                new CounterConfiguration
+                {
+                    LabelNames = new[] { "method", "endpoint" }
+                });
+
+            app.Use((context, next) =>
+            {
+                counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+                return next();
+            });
+```
 
 Mude o launch do projeto para NetCorePrometheus.Api
 
