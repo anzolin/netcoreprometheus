@@ -22,7 +22,9 @@
   <li><a href="#projeto">Projeto</a></li>
   <ol>
     <li><a href="#api">API</a></li>
-    <li><a href="#examples">Examples</a></li>
+    <li><a href="#examples">Configurando o Prometheus</a></li>
+    <li><a href="#examples">Docker</a></li>
+    <li><a href="#examples">Testando</a></li>
   </ol>
 
   <li><a href="#como-posso-contribuir">Como posso contribuir?</a></li>
