@@ -19,7 +19,11 @@
   <li><a href="#vantagens">Vantagens</a></li>
   <li><a href="#o-que-e-o-prometheus">O que é o Prometheus?</a></li>
   
-  <li><a href="#examples">Examples</a></li>
+  <li><a href="#projeto">Projeto</a></li>
+  <ol>
+    <li><a href="#examples">API</a></li>
+    <li><a href="#examples">Examples</a></li>
+  </ol>
 
   <li><a href="#como-posso-contribuir">Como posso contribuir?</a></li>
   <li><a href="#licenca">Licença</a></li>
@@ -67,6 +71,23 @@ Dentre muitas, estas são principais características do Prometheus:
 
 Este tutorial tem como objetivo de focar no entendimento sobre como configurar a coleta de métricas — utilizando o modelo pull via HTTP — na sua aplicação e também a visualização delas. Sendo assim, aqui não serão abordados assuntos como configuração e implantação do Prometheus. Contudo, para ter uma ideia do funcionamento geral da ferramenta, é interessante entender como funcionam os componentes internos do Prometheus.
 
+## Projeto
+
+### API
+
+O projeto de exemplo irá mostrar como é feito a configuração do Prometheus em uma API com .Net Core 6.0.
+A biblioteca que iremos utilizar pode ser encontrada no Nuget: prometheus-net.AspNetCore, utilizaremos a ultima versão até o momento de escrita deste artigo v4.1.1.
+
+Iremos criar uma ASP.NET Core (RESTful) Web API, para isso siga o próximo passos:
+
+1. Inicie o Visual Studio e clique em Create a new project
+
+<img src="images/img_001.png" alt="alt text" title="Title" />
+
+2. Escolha o tipo de projeto: ASP.NET Core Web Application
+
+<img src="images/img_002.png" alt="alt text" title="Title" />
+
 ## Como posso contribuir?
 
 Se você quer ajudar o projeto, aprimorando-o ou criando algo novo, seja bem-vindo. Este projeto foi criado para ser um lar de códigos úteis e reutilizáveis ​​para a comunidade .NET. Portanto, se você tiver algum trecho de código útil, limpo, desacoplado e testado e quiser contribuir para esse objetivo, faça um [pull request](https://github.com/anzolin/netcoreprometheus/pulls)!
@@ -106,3 +127,8 @@ Obrigado!
 [issues-url]: https://github.com/anzolin/netcoreprometheus/issues
 [license-shield]: https://img.shields.io/github/license/anzolin/netcoreprometheus.svg?style=for-the-badge
 [license-url]: https://github.com/anzolin/netcoreprometheus/blob/master/LICENSE.txt
+
+
+https://medium.com/guide-lab/monitoramento-prometheus-grafana-e-net-core-3-1-parte-1-63a43b845e9f
+
+https://medium.com/guide-lab/monitoramento-prometheus-grafana-e-net-core-3-1-parte-2-5f1c590b6c7f
