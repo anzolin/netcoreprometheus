@@ -191,7 +191,7 @@ Uma última configuração na API, no arquivo launchSettings.json, modifique o v
 
 Após essa última configuração, ao executarmos a aplicação pressionando “F5” poderemos ver o endpoint “/metrics” que a biblioteca do Prometheus criou para monitorar as informações da nossa API..
 
-<img src="images/img_011.png" alt="alt text" title="Title" />
+<img src="images/img_012.png" alt="alt text" title="Title" />
 
 Muito bem, neste momento, temos nossa api devidamente configurada para gerar suas métricas.
 
