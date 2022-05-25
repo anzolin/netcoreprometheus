@@ -88,6 +88,19 @@ Iremos criar uma ASP.NET Core (RESTful) Web API, para isso siga o próximo passo
 
 <img src="images/img_002.png" alt="alt text" title="Title" />
 
+3. Escolha o Nome para seu projeto, nosso exemplo irá se chamar: web-api-metrics e o local que o seu projeto irá ficar no seu computador. Agora clique em Create
+
+<img src="images/img_003.png" alt="alt text" title="Title" />
+
+4. Escolha API e clique em Create.
+
+<img src="images/img_004.png" alt="alt text" title="Title" />
+
+5. No Solution Explorer veremos as dependência do projeto
+
+<img src="images/img_005.png" alt="alt text" title="Title" />
+
+
 ## Como posso contribuir?
 
 Se você quer ajudar o projeto, aprimorando-o ou criando algo novo, seja bem-vindo. Este projeto foi criado para ser um lar de códigos úteis e reutilizáveis ​​para a comunidade .NET. Portanto, se você tiver algum trecho de código útil, limpo, desacoplado e testado e quiser contribuir para esse objetivo, faça um [pull request](https://github.com/anzolin/netcoreprometheus/pulls)!
