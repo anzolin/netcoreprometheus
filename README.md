@@ -195,6 +195,28 @@ Após essa última configuração, ao executarmos a aplicação pressionando “
 
 Muito bem, neste momento, temos nossa api devidamente configurada para gerar suas métricas.
 
+Agora que sabemos o que é o Prometheus e o seu propósito, vamos ver ele trabalhando na prática. O objetivo é entendermos como o Prometheus Server funciona e como podemos configurá-lo para coletar métricas da nossa api.
+
+
+### Docker
+
+#### Pré-requisitos
+
+Afim de termos uma boa experiência com o laboratório proposto neste artigo, será necessário a instalação de algumas ferramentas que são o Docker e Docker Compose.
+
+Segue abaixo os links das instalações oficiais:
+
+* [Docker CE (Community Edition)](https://docs.docker.com/engine/install/)
+* [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
+
+
+#### Recapitulando
+
+* Criamos uma controle para Listagem de Clientes e Buscar Cliente por Id
+* Configuramos o Swagger para termos nossos endpoints documentados
+* Criamos uma configuração para abrir o swagger no start da aplicação.
+* Criamos um Dockerfile para fazer o deploy da aplicação dentro de um container.
+
 
 ## Como posso contribuir?
 
