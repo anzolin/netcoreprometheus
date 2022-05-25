@@ -147,6 +147,10 @@ Obrigado!
 [license-url]: https://github.com/anzolin/netcoreprometheus/blob/master/LICENSE.txt
 
 
+<!--
+
 https://medium.com/guide-lab/monitoramento-prometheus-grafana-e-net-core-3-1-parte-1-63a43b845e9f
 
 https://medium.com/guide-lab/monitoramento-prometheus-grafana-e-net-core-3-1-parte-2-5f1c590b6c7f
+
+-->
