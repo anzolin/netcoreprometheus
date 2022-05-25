@@ -77,9 +77,10 @@ Este tutorial tem como objetivo de focar no entendimento sobre como configurar a
 
 ## Projeto
 
-### API
-
 O projeto de exemplo irá mostrar como é feito a configuração do Prometheus em uma API com .Net Core 6.0.
+
+
+### API
 
 A biblioteca que iremos utilizar pode ser encontrada no [Nuget](https://github.com/prometheus-net/prometheus-net) (utilizaremos a ultima versão até o momento de escrita deste artigo v6.0.0):
 
