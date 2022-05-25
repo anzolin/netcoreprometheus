@@ -114,7 +114,7 @@ Neste momento iremos buscar a biblioteca prometheus-net.AspNet no Nuget.
 Abra o Package Manager Console e execute o seguinte comando:
 
 ```bash
-Install-Package prometheus-net.AspNetCore -Version 6.0.0
+Install-Package prometheus-net.AspNetCore
 ```
 
 <img src="images/img_006.png" alt="alt text" title="Title" />
