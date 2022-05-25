@@ -195,6 +195,193 @@ Após essa última configuração, ao executarmos a aplicação pressionando “
 
 Muito bem, neste momento, temos nossa api devidamente configurada para gerar suas métricas.
 
+---
+
+`Models\Cpf.cs`
+```csharp
+namespace NetCorePrometheus.Api.Models
+{
+	public class Cpf
+	{
+		public string Number { get; private set; }
+		public bool IsValid { get; private set; }
+
+		public Cpf(string cpf)
+		{
+			IsValid = IsCpf(cpf);
+			Number = cpf;
+		}
+
+		public string GetNumber()
+		{
+			return Number;
+		}
+
+		private bool IsCpf(string Number)
+		{
+			int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+			int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+			string tempCpf;
+			string digito;
+			int soma;
+			int resto;
+
+			Number = Number.Trim();
+			Number = Number.Replace(".", "").Replace("-", "");
+
+			if (Number.Length != 11)
+				return false;
+
+			tempCpf = Number.Substring(0, 9);
+			soma = 0;
+
+			for (int i = 0; i < 9; i++)
+				soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+
+			resto = soma % 11;
+
+			if (resto < 2)
+				resto = 0;
+			else
+				resto = 11 - resto;
+
+			digito = resto.ToString();
+			tempCpf = tempCpf + digito;
+			soma = 0;
+
+			for (int i = 0; i < 10; i++)
+				soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+
+			resto = soma % 11;
+
+			if (resto < 2)
+				resto = 0;
+			else
+				resto = 11 - resto;
+
+			digito = digito + resto.ToString();
+
+			return Number.EndsWith(digito);
+		}
+	}
+}
+```
+
+`Models\Cliente.cs`
+```csharp
+namespace NetCorePrometheus.Api.Models
+{
+    public class Cliente
+    {
+        public Cliente(int id, string name, string email, string cpf)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+            Cpf = new Cpf(cpf);
+        }
+
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public Cpf Cpf { get; set; }
+
+        public bool Validate()
+        {
+            bool isValid = true;
+
+            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Email) || Cpf.IsValid)
+                isValid = false;
+
+            return isValid;
+        }
+    }
+}
+```
+
+`Repositories\ClienteRepository.cs`
+```csharp
+using NetCorePrometheus.Api.Models;
+
+namespace NetCorePrometheus.Api.Repositories
+{
+    public class ClienteRepository
+    {
+        private List<Cliente> _clientes;
+
+        public ClienteRepository()
+        {
+            _clientes = new List<Cliente>
+            {
+                new Cliente(1, "Douglas Modesto", "d.modesto@teste.com.br", "045.213.920-16"),
+                new Cliente(1, "Martin Diogo Filipe Anthony Jesus", "martindiogojuanjesus__martindiogojuanjesus@urbam.com.br", "980.725.820-03"),
+                new Cliente(1, "Diogo Nicolas Carvalho", "diogonicolascarvalho-74@saa.com.br", "406.244.580-83"),
+                new Cliente(1, "Ericka Sebastião Silveira", "eerickantoniosilveira@transtelli.com.br", "705.559.730-77"),
+                new Cliente(1, "Laura Jaqueline Aline Silva", "laurajaquelinealinesilva__laurajaquelinealinesilva@me.com", "711.605.230-53")
+            };
+        }
+
+        public Cliente ClienteById(int idCliente)
+        {
+            return _clientes.FirstOrDefault(x => x.Id == idCliente);
+        }
+
+        public IEnumerable<Cliente> GetClientes()
+        {
+            return _clientes;
+        }
+
+        public bool Save(Cliente cliente)
+        {
+            return true;
+        }
+    }
+}
+```
+
+`Controllers\ClienteController.cs`
+```csharp
+using Microsoft.AspNetCore.Mvc;
+using NetCorePrometheus.Api.Models;
+using NetCorePrometheus.Api.Repositories;
+
+namespace NetCorePrometheus.Api.Controllers
+{
+    [ApiController]
+    [Route("api/clientes")]
+    public class ClienteController : ControllerBase
+    {
+        private readonly ILogger<ClienteController> _logger;
+        private ClienteRepository _clienteRepository;
+
+        public ClienteController(ILogger<ClienteController> logger)
+        {
+            _logger = logger;
+            _clienteRepository = new ClienteRepository();
+        }
+
+        [HttpGet]
+        [Route("")]
+        public IEnumerable<Cliente> Clientes()
+        {
+            return _clienteRepository.GetClientes();
+        }
+
+
+        [HttpGet]
+        [Route("cliente")]
+        public Cliente ClienteById([FromQuery] int id)
+        {
+            return _clienteRepository.ClienteById(id);
+        }
+    }
+}
+```
+
+
+---
+
+
 Agora que sabemos o que é o Prometheus e o seu propósito, vamos ver ele trabalhando na prática. O objetivo é entendermos como o Prometheus Server funciona e como podemos configurá-lo para coletar métricas da nossa api.
 
 
