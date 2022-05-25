@@ -123,15 +123,52 @@ Após a instalação, poderemos ver a biblioteca nas dependências do projeto.
 
 <img src="images/img_007.png" alt="alt text" title="Title" />
 
-Agora iremos incluir a configuração do Prometheus na classe Startup.cs
+Agora iremos incluir a configuração do Prometheus na classe 'Program.cs'. Portanto, vamos criar uma nova classe denominada `PrometheusConfig.cs` com a seguinte estrutura:
 
-<img src="images/img_008.png" alt="alt text" title="Title" />
+```csharp
+    public static class PrometheusConfig
+    {
+        public static IApplicationBuilder UsePrometheusConfiguration(this IApplicationBuilder app)
+        {
+            // Custom Metrics to count requests for each endpoint and the method
+            var counter = Metrics.CreateCounter("webapimetric", "Counts requests to the WebApiMetrics API endpoints",
+                new CounterConfiguration
+                {
+                    LabelNames = new[] { "method", "endpoint" }
+                });
+
+            app.Use((context, next) =>
+            {
+                counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+                return next();
+            });
+
+            // Use the prometheus middleware
+            app.UseMetricServer();
+            app.UseHttpMetrics();
+
+            return app;
+
+        }
+    }
+```
+
+Na classe `Program.cs`, iremos adicionar a chamada da classe recém criada antes de HttpsRedirection:
+
+```csharp
+...
+app.UsePrometheusConfiguration(); // Configuração do Prometheus
+app.UseHttpsRedirection();
+...
+
+```
+
 
 O parte da configuração customizada irá nos ajudar a gerar informações de todas as requisições que nossas controllers irão receber.
 
 <img src="images/img_009.png" alt="alt text" title="Title" />
 
-Mude o launch do projeto para web_api_metrics
+Mude o launch do projeto para NetCorePrometheus.Api
 
 <img src="images/img_010.png" alt="alt text" title="Title" />
 
@@ -142,6 +179,8 @@ Uma última configuração na API, no arquivo launchSettings.json, modifique o v
 Após essa última configuração, ao executarmos a aplicação pressionando “F5” poderemos ver o endpoint “/metrics” que a biblioteca do Prometheus criou para monitorar as informações da nossa API..
 
 <img src="images/img_011.png" alt="alt text" title="Title" />
+
+Muito bem, neste momento, temos nossa api devidamente configurada para gerar suas métricas.
 
 
 ## Como posso contribuir?
