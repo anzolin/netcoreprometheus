@@ -92,7 +92,7 @@ Escolha o tipo de projeto: ASP.NET Core Web API
 
 <img src="images/img_002.png" alt="alt text" title="Title" />
 
-Escolha o Nome para seu projeto, nosso exemplo irá se chamar: web-api-metrics e o local que o seu projeto irá ficar no seu computador. Agora clique em Create
+Escolha o Nome para seu projeto, nosso exemplo irá se chamar: NetCorePrometheus e o local que o seu projeto irá ficar no seu computador. Agora clique em Create
 
 <img src="images/img_003.png" alt="alt text" title="Title" />
 
