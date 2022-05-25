@@ -30,7 +30,9 @@
   <li><a href="#como-posso-contribuir">Como posso contribuir?</a></li>
   <li><a href="#licenca">Licença</a></li>
   <li><a href="#sobre-o-autor">Sobre o autor</a></li>
+  <!--
   <li><a href="#doacoes">Doações</a></li>
+  -->
 </ol>
 
 ---
@@ -123,12 +125,14 @@ Este projeto sob a [Licença MIT](https://github.com/anzolin/netcoreprometheus/b
 Olá a todos, eu me chamo Diego Anzolin Ferreira. Eu sou um desenvolvedor .Net. Espero que você goste deste projeto tanto quanto eu gostei de desenvolvê-lo. Se você tiver algum problema, você pode postar uma [issue](https://github.com/anzolin/netcoreprometheus/issues). Você pode me contatar em diego@anzolin.com.br.
 
 
+<!--
 ## Doações
   
 Quer me ajudar a continuar criando projetos open source, faça uma doação:
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg?style=for-the-badge)](https://www.paypal.com/donate?business=DN2VPNW42RTXY&no_recurring=0&currency_code=BRL) [![Donate](https://img.shields.io/badge/-buy_me_a%C2%A0coffee-gray?logo=buy-me-a-coffee&style=for-the-badge)](https://www.buymeacoffee.com/anzolin)
 
+-->
 Obrigado!
 
 
