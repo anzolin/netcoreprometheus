@@ -109,6 +109,39 @@ Iremos criar uma ASP.NET Core (RESTful) Web API, para isso siga o próximo passo
 
 <img src="images/img_005.png" alt="alt text" title="Title" />
 
+6. Neste momento iremos buscar a biblioteca prometheus-net.AspNet no Nuget.
+Abra o Package Manager Console e execute o seguinte comando:
+
+```bash
+Install-Package prometheus-net.AspNetCore -Version 6.0.0
+```
+
+<img src="images/img_006.png" alt="alt text" title="Title" />
+
+7. Após a instalação, poderemos ver a biblioteca nas dependências do projeto.
+
+<img src="images/img_007.png" alt="alt text" title="Title" />
+
+8. Agora iremos incluir a configuração do Prometheus na classe Startup.cs
+
+<img src="images/img_008.png" alt="alt text" title="Title" />
+
+9. O parte da configuração customizada irá nos ajudar a gerar informações de todas as requisições que nossas controllers irão receber.
+
+<img src="images/img_009.png" alt="alt text" title="Title" />
+
+10. Mude o launch do projeto para web_api_metrics
+
+<img src="images/img_010.png" alt="alt text" title="Title" />
+
+11. Uma última configuração na API, no arquivo launchSettings.json, modifique o valor da propriedade launchUrl para metrics.
+
+<img src="images/img_011.png" alt="alt text" title="Title" />
+
+12. Após essa última configuração, ao executarmos a aplicação pressionando “F5” poderemos ver o endpoint “/metrics” que a biblioteca do Prometheus criou para monitorar as informações da nossa API..
+
+<img src="images/img_011.png" alt="alt text" title="Title" />
+
 
 ## Como posso contribuir?
 
