@@ -22,9 +22,9 @@
   <li><a href="#projeto">Projeto</a></li>
   <ol>
     <li><a href="#api">API</a></li>
-    <li><a href="#examples">Configurando o Prometheus</a></li>
-    <li><a href="#examples">Docker</a></li>
-    <li><a href="#examples">Testando</a></li>
+    <li><a href="#configurando-o-prometheus">Configurando o Prometheus</a></li>
+    <li><a href="#docker">Docker</a></li>
+    <li><a href="#testando">Testando</a></li>
   </ol>
 
   <li><a href="#como-posso-contribuir">Como posso contribuir?</a></li>
@@ -82,13 +82,13 @@ O projeto de exemplo irá mostrar como é feito a configuração do Prometheus e
 
 ### API
 
-Iremos criar uma ASP.NET Core (RESTful) Web API, para isso siga o próximo passos:
+Iremos criar uma ASP.NET Core Web API, para isso siga o próximo passos:
 
 Inicie o Visual Studio e clique em Create a new project
 
 <img src="images/img_001.png" alt="alt text" title="Title" />
 
-Escolha o tipo de projeto: ASP.NET Core Web Application
+Escolha o tipo de projeto: ASP.NET Core Web API
 
 <img src="images/img_002.png" alt="alt text" title="Title" />
 
