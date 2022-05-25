@@ -16,7 +16,7 @@
 			return Number;
 		}
 
-		private bool IsCpf(string Number)
+		private bool IsCpf(string number)
 		{
 			int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 			int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -25,13 +25,13 @@
 			int soma;
 			int resto;
 
-			Number = Number.Trim();
-			Number = Number.Replace(".", "").Replace("-", "");
+			number = number.Trim();
+			number = number.Replace(".", "").Replace("-", "");
 
-			if (Number.Length != 11)
+			if (number.Length != 11)
 				return false;
 
-			tempCpf = Number.Substring(0, 9);
+			tempCpf = number.Substring(0, 9);
 			soma = 0;
 
 			for (int i = 0; i < 9; i++)
@@ -60,7 +60,7 @@
 
 			digito = digito + resto.ToString();
 
-			return Number.EndsWith(digito);
+			return number.EndsWith(digito);
 		}
 	}
 }
