@@ -82,12 +82,6 @@ O projeto de exemplo irá mostrar como é feito a configuração do Prometheus e
 
 ### API
 
-A biblioteca que iremos utilizar pode ser encontrada no [Nuget](https://github.com/prometheus-net/prometheus-net) (utilizaremos a ultima versão até o momento de escrita deste artigo v6.0.0):
-
-```xml
-<PackageReference Include="prometheus-net.AspNetCore" Version="6.0.0" />
-```
-
 Iremos criar uma ASP.NET Core (RESTful) Web API, para isso siga o próximo passos:
 
 Inicie o Visual Studio e clique em Create a new project
@@ -109,6 +103,12 @@ Escolha API e clique em Create.
 No Solution Explorer veremos as dependência do projeto
 
 <img src="images/img_005.png" alt="alt text" title="Title" />
+
+A biblioteca que iremos utilizar pode ser encontrada no [Nuget](https://github.com/prometheus-net/prometheus-net) (utilizaremos a ultima versão até o momento de escrita deste artigo v6.0.0):
+
+```xml
+<PackageReference Include="prometheus-net.AspNetCore" Version="6.0.0" />
+```
 
 Neste momento iremos buscar a biblioteca prometheus-net.AspNet no Nuget.
 Abra o Package Manager Console e execute o seguinte comando:
