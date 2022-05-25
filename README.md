@@ -21,7 +21,7 @@
   
   <li><a href="#projeto">Projeto</a></li>
   <ol>
-    <li><a href="#examples">API</a></li>
+    <li><a href="#api">API</a></li>
     <li><a href="#examples">Examples</a></li>
   </ol>
 
