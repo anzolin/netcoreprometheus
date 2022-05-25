@@ -76,7 +76,12 @@ Este tutorial tem como objetivo de focar no entendimento sobre como configurar a
 ### API
 
 O projeto de exemplo irá mostrar como é feito a configuração do Prometheus em uma API com .Net Core 6.0.
-A biblioteca que iremos utilizar pode ser encontrada no Nuget: prometheus-net.AspNetCore, utilizaremos a ultima versão até o momento de escrita deste artigo v4.1.1.
+
+A biblioteca que iremos utilizar pode ser encontrada no Nuget (utilizaremos a ultima versão até o momento de escrita deste artigo v6.0.0):
+
+```xml
+<PackageReference Include="prometheus-net.AspNetCore" Version="6.0.0" />
+```
 
 Iremos criar uma ASP.NET Core (RESTful) Web API, para isso siga o próximo passos:
 
