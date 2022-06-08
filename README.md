@@ -750,6 +750,56 @@ Após logar, iremos ver a seguinte tela:
 
 <img src="images/img_055.png" alt="alt text" title="Title" />
 
+Primeiramente, vamos verficar se nossa configuração do datasource que fizemos anteriormente funcionou.
+
+<img src="images/img_056.png" alt="alt text" title="Title" />
+
+Siga os passos da imagem acima para saber se o datasource está configurado.
+
+1. Vá em ferramentas
+2. Clique em datasource
+3. Veja que nosso datasource com o nome prometheus-metrics está devidamente configurado e pronto pra uso.
+
+No grafana há diversos dashboards pré montados que só precisamos importar para o nosso grafana e utilizá-lo, vamos utilizar um deles.
+
+<img src="images/img_057.png" alt="alt text" title="Title" />
+
+* clique no sinal de mais (+)
+* clique em “import”
+* no campo de texto informe o código 10427
+* clique em load
+
+Deveremos ver a seguinte tela:
+
+<img src="images/img_058.png" alt="alt text" title="Title" />
+
+1. no campo name é mostrado o nome do dashboard, caso deseje pode alterar o nome do seus dashboard, nesse exemplo deixaremos esse mesmo nome.
+2. selecione nosso datasource do prometheus
+3. clique em import para concluir.
+
+Após clicar em import iremos ver o seguinte dashboard:
+
+<img src="images/img_059.png" alt="alt text" title="Title" />
+
+Agora temos um dashboard apresentando informações importantes do nosso serviço, como por exemplo:
+
+* Consumo de memória
+* Numéro de Threads abertas
+* Duração das requisições Http
+
+Essa são apenas algumas métricas extraídas da nossa api, poderiamos extrair diversas informações da nossa api e criar novos quadros para nosso dashboard.
+
+Para finalizar, para não perdermos nosso dashboard caso nosso container seja encerrado, vou mostrar como exportar nosso dashboard e incluir nas configurções do grafana, pra sempre que inciarmos nosso contêiner nosso dashboard fique persistido.
+
+<img src="images/img_060.png" alt="alt text" title="Title" />
+
+No menu superior, clique no icone de ferramentas. Deverá aparecer a seguinte tela:
+
+<img src="images/img_061.png" alt="alt text" title="Title" />
+
+Lembre-se que durante a configuração do nosso projeto, não incluimos nenhuma informação no arquivo dasboard-webmetric.json dentro do diretório config/dashboards, vamos colar todo o conteudo dentro desse arquivo.
+
+<img src="images/img_062.png" alt="alt text" title="Title" />
 
 
 ## Como posso contribuir?
