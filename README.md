@@ -404,6 +404,196 @@ Segue abaixo os links das instalações oficiais:
 * Criamos uma configuração para abrir o swagger no start da aplicação.
 * Criamos um Dockerfile para fazer o deploy da aplicação dentro de um container.
 
+Após as atualizações, ao iniciarmos nosso projeto, no endpoint localhost:8888/swagger/index.html, ele irá abrir nosso swagger, conforme imagem abaixo.
+
+<img src="images/img_013.png" alt="alt text" title="Title" />
+
+
+## Configurando o Prometheus
+
+No diretório onde se encontra a pasta Root da nosso serviço web-api-metrics, iremos criar uma nova pasta com nome prometheus e também iremos criar um arquivo chamado docker-compose.yml. O diretório deverá ficar conforme imagem abaixo.
+
+<img src="images/img_014.png" alt="alt text" title="Title" />
+
+Na pasta prometheus iremos incluir as configurações do prometheus para ele rodar dentro do conteiner do docker.
+Não se preocupe com o conteúdo do arquivo docker-compose.yml, mais a frente iremos incluir algumas configurações e cada uma dessas configurações será explicada e detalhada.
+
+Dentro da pasta prometheus iremos criar alguns arquivos e diretórios que seguem:
+
+* crie um arquivo chamado Dockerfile (perceba que o arquivo Dockerfile não tem extensão)
+* crie um arquivo chamado prometheus.yml
+* crie uma pasta chamada data
+
+<img src="images/img_015.png" alt="alt text" title="Title" />
+
+No arquivo Dockerfile iremos configurar a imagem do prometheus como segue abaixo:
+
+<img src="images/img_016.png" alt="alt text" title="Title" />
+
+Neste arquivo estamos:
+
+* Buscando a imagem do prometheus prom/prometheus:v2.17.1
+* Copiando nosso arquivo prometheus.yml para dentro do diretório /etc/prometheus que irá se econtrar dentro do contêiner
+* Definimos um volume na pasta /data para persitir nossas informações do prometheus no host caso percamos nosso container.
+* Estamos expondo a imagem na porta 9090
+
+
+No arquivo prometheus.yml iremos incluir algumas configurações.
+
+<img src="images/img_017.png" alt="alt text" title="Title" />
+
+Neste arquivos estamos:
+
+* Setando o intervalo de 5 segundos para que o prometheus realize o pull das métricas
+* Estamos dando o nome web-api-metrics-job para o job do prometheus
+* Incluindo o endereço que o nosso serviço estará rodando e qual caminho ele irá encontrar as métricas /metrics
+* observação: Onde está o endereço IP, você deverá coloca o IP da sua máquina. Estamos utilizando o IP por que o prometheus e a nossa api irão se comunicar via containers do docker.
+
+
+A princípio, essa são as configurações que devemos fazer no Prometheus para ele passar a buscar as informações que nossa api está gerando no endpoint /metrics
+
+<img src="images/img_018.png" alt="alt text" title="Title" />
+
+Agora voltaremos para o diretório raiz do nosso projeto, para incluir as configurações necessárias no nosso arquivo docker-compose.yml
+
+<img src="images/img_019.png" alt="alt text" title="Title" />
+
+Vamos entrar um pouco mais no detalhe desse arquivo.
+Dentro de services, temos dois serviços configurados que são api e prometheus.
+
+No service api, estamos fazendo o seguinte:
+
+* Na tag context estamos dizendo nosso contexto é dentro do diretório /web-api-metrics, e que dentro desse diretório existe um arquivo Dockerfile.
+* Na tag image estamos dando um nome para a nossa imagem, que é web-api-metrics-image
+* Na tag port estamos fazendo o mapeamento das portas, onde o serviço roda na porta 80 dentro do container, e iremos expor a porta 8888 para o host.
+* Na tag networks estamos apontando pra nossa configuração de rede web_api_metrics_networks onde os containeres irão se comunicar.
+
+<img src="images/img_020.png" alt="alt text" title="Title" />
+
+No service prometheus, estamos fazendo o seguinte:
+
+* Na tag context estamos dizendo nosso contexto é dentro do diretório /prometheus, e que dentro desse diretório existe um arquivo Dockerfile.
+* Na tag image estamos dando um nome para a nossa imagem, que é prometheus-local-image
+* Na tag restart quando colocamos always significa que o contêiner será reinicializado sempre que houver alguma atualização.
+* Na tag port estamos fazendo o mapeamento das portas, onde o serviço roda na porta 9090 dentro do container, e iremos expor a porta 9090.
+* Na tag networks estamos apontando pra nossa configuração de rede web_api_metrics_networks onde os containeres irão se comunicar.
+
+<img src="images/img_021.png" alt="alt text" title="Title" />
+
+Em networks, estamos fazendo o seguinte:
+
+* criamos uma rede com o nome web_api_metrics_network
+* e colocamos o driver como overlay, isso significa que criamos uma rede distribuída em vários hosts daemon do Docker. Essa rede fica no topo (sobrepõe) as redes especificas do host.
+
+<img src="images/img_022.png" alt="alt text" title="Title" />
+
+Em teoria é isso, com as configurações que temos até o momento, já podemos rodar nosso projeto e ver o prometheus coletando as informações.
+
+Antes de executar os próximos comandos do Docker, certifique-se que o Docker da sua máquina esteja rodando, blz?
+
+Vamos lá, abra um Command Line da sua preferença, navegue até o diretório onde está nosso arquivo docker-compose.yml no diretório raiz do nosso projeto.
+
+<img src="images/img_023.png" alt="alt text" title="Title" />
+
+Após isso execute o seguinte comando:
+
+* docker-compose up
+
+<img src="images/img_024.png" alt="alt text" title="Title" />
+
+Após a execução do comando docker-compose up, a construção dos containeres da nossa api e do prometheus deverão ser construidos.
+
+No Windows temos um recurso bem interessante para gerenciarmos nossos conteineres que é o Docker Desktop. Ele oferece uma forma visual para conseguirmos analisar nossos conteineres conforme imagem abaixo.
+
+<img src="images/img_025.png" alt="alt text" title="Title" />
+
+Nesta tela podemos ver nossos dois conteineres em execução, o contêiner da api e o contêiner do prometheus.
+
+<img src="images/img_026.png" alt="alt text" title="Title" />
+
+
+Podemos observar que nossa api tem dois endpoints, o endpoint /api/customers é onde iremos realizar a listagem de clientes, e o endpoint /api/customers/customer é onde iremos buscar o cliente pelo seu codigo de identificação.
+
+A ideia é que, sempre que recebermos alguma requisição nesses endpoints, o prometheus contabilize pra gente quantas requisições esses endpoints receberam, entre outras métricas que veremos a seguir.
+
+Vamos ver agora a interface do prometheus que estamos executando pelo Docker na porta 9090
+
+<img src="images/img_027.png" alt="alt text" title="Title" />
+
+
+## Testando nosso cenário
+
+
+Nossa API web-api-metrics está rodando na porta 8888, conforme configuramos no arquivo docker-compose.yml.
+
+Se abrimos no navegador a url http:localhost:8888/metrics iremos ver as metricas geradas pela biblioteca do prometheus para o .Net Core.
+
+<img src="images/img_026.png" alt="alt text" title="Title" />
+
+Para acessarmos o swagger da API, devemos navegar na url: http:localhost:8888/swagger/index.hml . então veremos a documentação da API, onde iremos realizar nossos testes.
+
+<img src="images/img_028.png" alt="alt text" title="Title" />
+
+Podemos perceber que o prometheus está observando nossa api no endpont e porta que configuramos, localhost:8888/metrics
+
+Após realizar algumas requisições nos endpoints de listagem de clientes, e busca de cliente por id, podemos ver as seguintes informações no prometheus:
+
+* Quantidade de requisições por endpoint
+
+<img src="images/img_029.png" alt="alt text" title="Title" />
+
+* Gráfico de quantidade de requisições por endpoint
+
+<img src="images/img_030.png" alt="alt text" title="Title" />
+
+* Gráfico que verifica se nossa api está funcionando
+
+<img src="images/img_031.png" alt="alt text" title="Title" />
+
+* Gráfico que mostra o processamento da CPU por segundo
+
+<img src="images/img_032.png" alt="alt text" title="Title" />
+
+Existem diversos tipos de métricas que podemos capturar com o Prometheus, as métricas apresentadas acima são apenas algumas.
+
+Com apenas algumas configurações, podemos tirar métricas valiosas dos nossos serviços com o objetivo de prover disponibilidade e qualidade para os mesmos.
+
+Você deve estar se perguntando, ok entendi, mas e ai?
+
+* Só conseguimos gerar esse tipo de gráfico?
+* E se eu quiser customizar os gráfico e criar um dashboard com as informações que eu achar importante de forma consolidada, como eu faço isso?
+
+Para responder essas perguntas, eu vou lhe apresentar o Grafana.
+
+## Grafana
+
+### O que é o grafana?
+
+Grafana é uma aplicação web que fornece visualização interativa dos dados. Ele fornece diversos recursos de visualização como tabelas, gráficos, mapas de calor, painéis de textos livre e alertas. É expansível através de um sistema de plug-ins, os usuários finais podem criar painéis de monitoramento complexos usando consultas interativas representando métricas específicas em um determinado período de tempo, como veremos a seguir.
+
+
+### Por que utilizar o Grafana?
+
+Com essa ferramenta poderosa podemos compartilhar informações importantes com toda a equipe, informações que podem vir de diferentes fontes de dados, como bancos de dados, planilhas de excel, plugins entre outras tantas, e com isso consolidar todas essas informaçõe em um lugar centralizado por meio de uma única interface intuitiva e completa. Isso pode facilitar o gerenciamento dos indicadores e facilitar a tomada de decisão de forma rápida e eficiente.
+
+### Mão na massa
+Agora que sabemos que é o Grafana e o seu propósito, assim como fizemos com o prometheus no artigo anterior, vamos ver ele trabalhando na prática. Nosso objetivo será entender como o Grafana funciona e como podemos criar dashboards customizáveis de forma rápida e eficiente.
+
+#### Pré-requisitos
+Afim de termos uma boa experiência com o laboratório proposto neste artigo, será necessário a instalação de algumas ferramentas que são o Docker e Docker Compose.
+
+Segue abaixo os links das instalações oficiais:
+
+* [Docker CE (Community Edition)](https://docs.docker.com/engine/install/)
+* [Docker Compose](https://docs.docker.com/compose/install/#install-compose)
+
+
+### Configurando o Grafana
+
+No diretório onde se encontra a pasta Root do nosso projeto web-api-metrics, iremos criar uma nova pasta com nome grafana.
+
+Dentro dela, criaremos as seguintes pastas e arquivos (vamos detalhar um-por-um a seguir):
+
 
 ## Como posso contribuir?
 
