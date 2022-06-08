@@ -801,6 +801,18 @@ Lembre-se que durante a configuração do nosso projeto, não incluimos nenhuma 
 
 <img src="images/img_062.png" alt="alt text" title="Title" />
 
+Com isso, sempre que executar seu contêiner, nosso dashboard estará salvo. Um ponto bem importante é que sempre que atualizar o seu dashboard você deverá extrair o json novamente e colar nesse arquivo para não perder suas mudanças caso seu contêiner fique fora do ar.
+
+## Conclusão
+
+O grafana é um recurso poderoso para podermos visualizar informações importantes de nossos serviços integrada com diversas fontes de dados como Elastic Search, AWS Cloud Watch, Azure Monitor, Prometheus entre outros tantos.
+
+Pudemos acompanhar nessa jornada a criação de uma API com dotnet Core 3.1 e sua configuração para gerar métricas que o Prometheus pudesse capturar.
+Realizamos também a configuração do Prometheus no Docker para que pudesse capturar as informações geradas pelo nosso serviço.
+E por fim, configuramos o Grafana no Docker para que usasse o prometheus como fonte de dados e importamos um dasboard totalmente útilizável sem que nos preocupassemos em criar alguma Prom Query pra buscar as informações do Prometheus.
+
+Então é isso pessoal, espero que tenha curtido essa nossa trajetória até aqui. E fique avontade para compartilhar sua opinião nos comentários.
+
 
 ## Como posso contribuir?
 
