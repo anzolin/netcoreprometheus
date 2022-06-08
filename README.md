@@ -594,6 +594,163 @@ No diretório onde se encontra a pasta Root do nosso projeto web-api-metrics, ir
 
 Dentro dela, criaremos as seguintes pastas e arquivos (vamos detalhar um-por-um a seguir):
 
+<img src="images/img_033.png" alt="alt text" title="Title" />
+
+Na pasta grafana iremos incluir as configurações do grafana para ele rodar dentro de um contêiner do docker.
+
+Dentro da pasta grafana iremos criar alguns arquivos e diretórios que seguem:
+
+* crie um arquivo chamado Dockerfile (perceba que o arquivo Dockerfile não tem extensão).
+* crie três pastas com os seguintes nomes: config, dashboards e provisioning
+
+<img src="images/img_034.png" alt="alt text" title="Title" />
+
+* dentro do diretório config crie um arquivo com nome grafana.ini
+
+<img src="images/img_035.png" alt="alt text" title="Title" />
+
+* dentro do diretório dashboards crie um arquivo com nome dashboard-webmetric.json
+
+<img src="images/img_037.png" alt="alt text" title="Title" />
+
+* dentro do diretório provisioning crie os seguintes diretórios: dashboards, datasource e notifiers
+
+<img src="images/img_038.png" alt="alt text" title="Title" />
+
+* dentro do diretório dashboards em provisioning crie um arquivo com nome dashboard.yml
+
+<img src="images/img_039.png" alt="alt text" title="Title" />
+
+* dentro do diretório datasource crie um arquivo com nome datasource.yml
+
+<img src="images/img_040.png" alt="alt text" title="Title" />
+
+* dentro do diretório notifiers crie um arquivo com nome alertNotificationChannel.yml
+
+<img src="images/img_041.png" alt="alt text" title="Title" />
+
+No arquivo Dockerfile iremos configurar a imagem do grafana como segue abaixo:
+
+<img src="images/img_042.png" alt="alt text" title="Title" />
+
+Neste arquivo estamos:
+
+Buscando a imagem do grafana grafana/grafana:7.3.1
+* Copiando nosso arquivo grafana.ini para dentro do diretório /etc/grafana que irá se encontrar dentro do contêiner.
+* Copiando o diretório provisioning para substituir o diretório provisioning dentro do contêiner.
+* Copiando o diretório dashboards para subistituir o diretório dashboards dentro do contêiner.
+* Estamos expondo a imagem na porta 3000.
+
+No arquivo grafana.ini dentro do diretório config iremos inserir algumas configurações para o grafana como segue imagem abaixo:
+
+<img src="images/img_043.png" alt="alt text" title="Title" />
+
+Nesse arquivo estamos:
+
+* inserindo nosso usuário e senha para podermos acessar o grafana.
+* setando o caminho de onde será feito o provisionamento dentro da imagem do grafana.
+* setando o tema do grafana para dark
+
+No arquivo dashboard.yml dentro do diretório provisioning/dashboards iremos incluir as seguintes configurações:
+
+<img src="images/img_044.png" alt="alt text" title="Title" />
+
+As configurações mais importantes são:
+
+* colocando o intervalo de atualização dos dashboards a cada 10 segundos.
+* incluindo o caminho de onde irá ficar os dasboards criados.
+
+No arquivo datasource.yml dentro do diretório provisioning/datasources iremos incluir as seguintes configurações:
+
+<img src="images/img_045.png" alt="alt text" title="Title" />
+
+As configurações mais importantes são:
+
+* colocar a url do prometheus que subimos
+* setar o nome do datasource prometheus-metrics
+* setar que o dashboard será editável
+* setar o tipo de acesso será proxy
+
+No arquivo alertNotificationChannel.yml dentro do diretório provisioning/notifiers iremos incluir as seguintes configurações:
+
+<img src="images/img_046.png" alt="alt text" title="Title" />
+
+As configurações mais importantes são::
+
+* setar o tipo de alerta como teams, que será o canal que receberá o alerta.
+* setar a frequência de 15 horas que é o tempo que o alerta será disparado para o canal do teams.
+* setar a url do web hook gerado pelo teams.
+
+Acredito que tenha percebido que não incluimos nenhuma configuração para o arquivo dasboard-webmetric.json dentro do diretório config/dashboards. Não se preocupe, mais pra frente iremos incluir as configurações nesse arquivo.
+
+Vamos colocar nosso grafana pra rodar, pra isso iremos incluir as configurações de inicialização do grafana no arquivo docker-compose.yml
+
+<img src="images/img_047.png" alt="alt text" title="Title" />
+
+No arquivo docker-compose.yml, vamos focar na configuração do grafana.
+
+No service grafana, estamos fazendo o seguinte:
+
+* Na tag context estamos dizendo que nosso contexto é dentro do diretório /grafana, e que dentro desse diretório existe um arquivo Dockerfile.
+* Na tag image estamos dando um nome para a nossa imagem, que é grafana-local
+* Na tag port estamos fazendo o mapeamento das portas, onde o serviço roda na porta 3000 dentro do container, e iremos expor a porta 3000 para o host.
+
+Com as configurações acima, podemos rodar nosso projeto e ver a api rodando na porta 8080, o prometheus rodando na porta 9090 e o grafana rodando na porta 3000.
+
+Antes de executar os próximos comandos do Docker, certifique-se que o Docker da sua máquina esteja rodando, blz?
+
+Vamos lá, abra um Command Line da sua preferência, navegue até o diretório onde está nosso arquivo docker-compose.yml no diretório raiz do nosso projeto.
+
+<img src="images/img_048.png" alt="alt text" title="Title" />
+
+Após isso execute o seguinte comando:
+
+* docker-compose up
+
+<img src="images/img_049.png" alt="alt text" title="Title" />
+
+Após a execução do comando docker-compose up, a construção dos containeres da nossa api, prometheus e do grafana deverão ser construidos.
+
+No Windows temos um recurso bem interessante para gerenciarmos nossos conteineres que é o Docker Desktop. Ele oferece uma forma visual para conseguirmos analisar nossos conteineres conforme imagem abaixo.
+
+<img src="images/img_050.png" alt="alt text" title="Title" />
+
+Nesta tela podemos ver nossos três conteineres em execução, o contêiner da api o contêiner do prometheus e o contêiner do grafana.
+
+### Testando nosso cenário
+
+Nossa API web-api-metrics está rodando na porta 8080, conforme configuramos no arquivo docker-compose.yml.
+
+Se abrimos no navegador a url http:localhost:8080/metrics iremos ver as metricas geradas pela biblioteca do prometheus para o .Net Core.
+
+<img src="images/img_051.png" alt="alt text" title="Title" />
+
+Para acessarmos o swagger da API, devemos navegar na url: http:localhost:8080/swagger/index.hml . então veremos a documentação da API, onde iremos realizar nossos testes.
+
+<img src="images/img_052.png" alt="alt text" title="Title" />
+
+Podemos observar que nossa api tem dois endpoints, o endpoint /api/customers é onde iremos realizar a listagem de clientes, e o endpoint /api/customers/customer/{id} é onde iremos buscar o cliente pelo seu codigo de identificação.
+
+A ideia é que, sempre que recebermos alguma requisição nesses endpoints, o prometheus contabilize pra gente quantas requisições esses endpoints receberam, entre outras métricas que veremos a seguir.
+
+Vamos ver agora a interface do prometheus que estamos executando pelo Docker na porta 9090
+
+<img src="images/img_053.png" alt="alt text" title="Title" />
+
+Vamos ver agora a interface do grafana que estamos executando pelo Docker na porta 3000.
+
+<img src="images/img_054.png" alt="alt text" title="Title" />
+
+O usuário e senha é o mesmo que configuramos no arquivo granfa.ini
+
+username: admin
+password: @admin
+
+Após logar, iremos ver a seguinte tela:
+
+<img src="images/img_055.png" alt="alt text" title="Title" />
+
+
 
 ## Como posso contribuir?
 
